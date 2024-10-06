@@ -1,6 +1,6 @@
-# Aditube Documentation
+# Aditube 
 
-## Version 4.2
+
 
 ### Introduction
 Aditube is an ad-server software that manages ads on websites. It is designed for use in various scenarios:
