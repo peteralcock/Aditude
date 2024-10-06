@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js?v=##rand##"></script>
+
+	<title>##TITLE##</title>
+
+	
+
+	<!-- PAYPAL  -->
+	<script>
+		var paypal_redir = "##PAYPAL_REDIRURL##";
+        if ("##PAYPAL_CLIENTID##"!="") {
+            const scriptTag = document.createElement('script');
+            scriptTag.src = 'https://www.paypal.com/sdk/js?client-id=##PAYPAL_CLIENTID##&currency=##CURRENCY##';
+            document.head.appendChild(scriptTag);
+
+            jQuery(document).ready(function($) {
+			    function loadPaypal() {
+                    if(typeof(paypal) != "undefined") {
+                    paypal.Buttons({
+                    style: {
+                        layout: 'horizontal',
+                    },
+                    createOrder: function(data, actions) {
+                        // This function sets up the details of the transaction, including the amount and line item details.
+                        return actions.order.create({
+                            purchase_units: [{
+                                reference_id : "##REFID##",
+                            amount: {
+                                value: '##PREZZOFINALE##',
+                                currency: '##CURRENCY##'
+                            }
+                            }],
+                            application_context: {
+                            shipping_preference: 'NO_SHIPPING'
+                            }
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        // This function captures the funds from the transaction.
+                        return actions.order.capture().then(function(details) {
+                            // This function shows a transaction success message to your buyer.
+
+                            freeze("<span class='icon-spin5 animate-spin'></span> {Loading...}","");
+
+                            refid = 0;
+                            details.purchase_units.forEach(function (element) {
+                                console.log(element);
+                                if (element.reference_id) {
+                                    refid = element.reference_id;
+                                    console.log("refid = " + refid);
+                                }
+                            });
+
+                            document.location.href= paypal_redir + "&id_paypal=" + encodeURIComponent(details.payer.email_address) + "&transid=" + encodeURIComponent(details.id) + "&status=" + encodeURIComponent(details.status) +  "&update_time=" + encodeURIComponent(details.update_time) + "&refid=" + refid ;
+
+                        });
+                    }
+                    }).render('#paypal-button-container');
+                    
+                    } else {
+                        setTimeout(loadPaypal,500);
+                    }
+                }
+                loadPaypal();
+            } );
+
+        } else {
+            jQuery(document).ready(function($) { $('#paypaldiv').hide(); });
+        }
+	</script>
+
+
+
+	<!-- COINBASE -->
+	<script>
+		jQuery(document).ready(function($) {
+			if ("##COINBASE_API_KEY##"=="") $('#coinbasediv').hide();
+			$('#coinbase-button').on("click",function(e){
+				e.preventDefault();
+				$.get("ajax.jobs.php?op=coinbase&id=" + $("#id").val(), function(responseTxt, statusTxt, xhr){
+					if(responseTxt.indexOf("http")==0) {
+						document.location.href = responseTxt
+					} else {
+                        alert("Error");
+                    }
+				});
+			});
+		});
+	</script>
+
+
+	<!-- MANUAL -->
+	<script>
+		jQuery(document).ready(function($) {
+
+			function nl2br (str, is_xhtml) {
+				var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>';
+				return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+			}
+
+			if ("##MANUAL_PAYMENTS##"=="OFF") $('#manualdiv').hide();
+			$('#manual-button').on("click",function(e){
+				e.preventDefault();
+
+				var paymentInfo = "##MANUAL_PAYMENTS_INFO##";
+
+				gconfirm(
+						nl2br(paymentInfo),
+						function(){
+							$.get("ajax.jobs.php?op=manual&id=" + $("#id").val(), function(responseTxt, statusTxt, xhr){
+								if(responseTxt.indexOf("http")==0) {
+									document.location.href = responseTxt
+								}
+							});
+						},
+						_e("CONFIRM"),
+						_e("CANCEL"),
+						"",
+						_e("Complete manual payment")
+				);
+
+			});	
+		});
+
+
+
+	</script>
+	<style>
+
+		#manualdiv, #coinbasediv, #paypaldiv { text-align:center; max-width:200px; width: 100%; }
+		#manualdiv > *, #coinbasediv > *, #paypaldiv > * { max-width:100%}
+		
+		#manualdiv a, #coinbasediv a {margin-top:2rem;margin-bottom:5px;line-height:35px;border-radius:3px;display:block;background:#6633ff;color:#fff;font-weight:bold}
+		#manualdiv a:hover, #coinbasediv a:hover {opacity:.8}
+
+		#manualdiv a {background:#424242;color:#fff;}
+	
+	</style>
+</head>
+<body class="##bodyclass##">
+	<div class="panel2">
+		<div class="titlecontainer">
+			<a href="#" onclick="document.location.href='##gestore##?op=modifica&id=' + gup('id');" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1>
+		</div>
+	</div>
+
+<div class="corpo">
+	##STARTFORM##
+	##id##
+	##op##
+	<fieldset class='mainfieldset'>
+		<legend>{Checkout}</legend>
+		<div id='Datiprincipali'>
+			<table>
+				<tr>
+					<td class='firstcol'>{Item description}:<br/></td>
+					<td><b>##posizione##</b><br>
+					</td>
+				</tr>
+				<tr>
+					<td class='firstcol'>{Price}:<br/></td>
+					<td><b>##MONEY## <span class="firstprice">##firstprice##</span></b><br>
+					</td>
+				</tr>
+				<tr>
+					<td class='firstcol'><br/></td>
+					<td><b>##detailes##</b>
+					</td>
+				</tr>
+				<tr style="display:none">
+					<td class='firstcol'>{Discount code}:<br/></td>
+					<td>##codice_sconto## <a href='#' class='btn'>{Apply}</a></td>
+				</tr>
+				<tr>
+					<td class='firstcol'>{Final price}:<br/></td>
+					<td>##MONEY## <span id='finalprice'>##finalprice##</span>
+				</tr>
+				<tr><td></td><td>
+
+						<div id='paypaldiv'>
+							<div id='paypal-button-container'></div>
+							<img src='template/paypal-cards.jpg'/>
+						</div>
+					
+						<div id="coinbasediv">
+							<a href='#' id='coinbase-button'>COINBASE CRYPTO</a>
+							<img src='template/cryptologhi.png'/>
+						</div>
+
+						<div id="manualdiv">
+							<a href='#' id='manual-button'>{MANUAL PAYMENT}</a>
+						</div>
+					
+					</td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+	
+
+
+	##ENDFORM##
+</div>
+</body>
+</html>

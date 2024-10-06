@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script  src="##root##src/template/comode.js?v=##VER##"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('.panel2 .elimina').addClass("disabled");
+		});
+		function setStato (obj,c,id) {
+			var td =jQuery(obj).parent();
+			if(c=='0') jQuery(td).html("<span class=\"labelgrey\">...</span>");
+			if(c=='1') jQuery(td).html("<span class=\"labelgrey\">...</span>");
+			
+			url = "ajax/toggleStato.php?op="+c+"&id="+id;
+			$.ajax({	'type' : 'GET',
+				'url' : url,
+				'success' : function( response ) { 
+					if (response) { 
+						jQuery(td).html(response);
+					} },
+				'error' : function () { alert("errore");  }
+			});
+		}		
+    
+        function confermaDeleteCheck(theForm) {
+			confermaDeleteCheckMsg(theForm, "{Do you confirm to delete the selected users and all their data?}");
+		}
+	</script>
+
+	<style> td.col6 a.labelgreen {color:green}
+	td.col6 a.labelred {color:red}
+	</style>
+	<title>##TITLE##</title>
+
+</head>
+<body>
+<div class="panel2">
+	<div class="titlecontainer">
+
+		<h1 class='title'>##TITLE##</h1>
+		
+		##aggiungi## <!--  add -->
+		
+		##bottoni2## <!-- delete -->
+		
+
+	</div>
+	<div class="filters">
+		<form id='filtri' method='get' name='filtri'>
+			<div class="field">
+				<label>{Status}:</label>
+				<span class="icon-filter">##combotipo##</span>
+			</div>			
+			<div class="field">
+				<label>{Find}:</label>
+				<span class="icon-search"><input type="text" name="keyword" class='find' id="keyword" value="##keyword##" onkeypress="submitonenter('filtri',event,this)"/></span>
+			</div>															
+		</form>
+	</div>
+
+</div>
+
+
+<!-- <div class='panel'>
+	<form style='margin:0px; padding:0px;' id='filtri' method='get' name='filtri'>
+	<table>
+		<tr>
+			<td><h1 class='title'>##TITLE##</h1></td>
+		<td>{Status}: ##combotipo##</td>
+		<td>{Find}: <label><span class="find icon-search"></span><input type="text" name="keyword" class='find' id="keyword" value="##keyword##" onkeypress="submitonenter('filtri',event,this)"/></label></td><td>&nbsp; &nbsp; &nbsp; </td>
+		<td id="td_add">##aggiungi##</td><td id="td_del">##bottoni2##</td>
+		</tr>
+	</table>
+	</form>
+</div> -->
+<div class='corpo'>
+	##corpo##
+</div>
+
+
+</body>
+</html>

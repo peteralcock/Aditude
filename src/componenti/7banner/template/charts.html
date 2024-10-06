@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js"></script>
+
+	<title>##TITLE##</title>
+
+	<script src="//code.highcharts.com/highcharts.js"></script>
+
+
+	<script>
+		var chart;
+
+		function fixChart(){
+			chart.setSize(jQuery("#container").width(), jQuery("#container").height(), true);
+		}
+
+		$(document).ready(function() {
+
+			jQuery("#mobiletoggle").on("click",function(){
+				//let q = 0;
+				//var interv = setInterval(function(){ fixChart(); q++; if(q==10) clearInterval(interv);}, 500);
+				setTimeout(function(){fixChart();},500);
+			});
+
+			if(gup("op")=="stats") try {
+				//$('div.panel').hide();
+			chart = new Highcharts.Chart({
+					chart: {
+						zoomType: 'xy',
+						renderTo: 'container'
+					},
+					title: {
+						text: ''
+					},
+					xAxis: [{
+						categories: [##GIORNI##],
+						crosshair: true
+					}],
+					yAxis: [{ // Primary yAxis
+						min: 0,
+						labels: {
+							format: '{value}',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						},
+						title: {
+							text: 'Click',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						}
+					}, { // Secondary yAxis
+						min:0,
+						title: {
+							text: 'Impressions',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						labels: {
+							format: '{value}',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						opposite: true
+					}],
+					tooltip: {
+						shared: true
+					},
+					legend: {
+						layout: 'vertical',
+						align: 'left',
+						x: 120,
+						verticalAlign: 'top',
+						y: 100,
+						floating: true,
+						backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+					},
+					series: [##SERIE##]
+			});
+			}
+			catch (e) {
+				alert(e);
+			}
+		   
+
+
+			var interv = setInterval(function(){ 
+				if(jQuery("#mainmenucontainer").length > 0)	{
+					fixChart();
+					clearInterval(interv);
+					console.log("fix");
+				} else {
+					console.log("aspetto");
+				}
+			}, 500);		
+			
+		   
+		});
+
+
+		$(window).resize(function(){
+			setTimeout(function(){fixChart();},500);
+		});
+
+	</script>
+
+</head>
+	<body>
+
+
+		<div class="panel2">
+			<div class="titlecontainer">
+	
+				<h1 class='title'>##TITLE## - Stats for campaign: ##CLIENTE##</h1>
+				
+				 <!-- ##bottoni1## add -->
+				
+				<!-- ##bottoni2## delete -->
+				
+	
+			</div>
+		
+			<div class="filters">
+					##STARTFORM##
+					##op##
+					<div style='display:none'>##combosites##</div>
+					<div class="field">
+						<label>&nbsp;</label>
+						<span>##CSV##</span>
+					</div>
+					<div class="field">
+						<label>{Banners in this campaign}:</label>
+						<span class="icon-filter">##combobanner##</span>
+					</div>
+					<div class="field">
+						<label>{From}:</label>
+						<span>##startdate##</span>
+					</div>
+					<div class="field">
+						<label>{To}:</label>
+						<span>##enddate## ##SUBMIT##</span>
+					</div>
+					##ENDFORM##
+			</div>
+
+			
+	
+		</div>
+	
+	
+		<div class="corpo">
+
+			<div class="boxes">
+				
+				<div class="box">
+					<span class='label2'>{CPM}: 
+						<span data-rel="{Cost for 1.000 impressions.} ##AVVISO##" class="icon-help-circled"></span> 
+					</span>
+					<span>##CPM##
+							<b>##MONETA##</b>
+							##WARNING##
+							
+					</span>
+				</div>
+
+				<div class="box">
+					<span class='label2'>{CPC}: 
+						<span data-rel="{Cost for 1 click.} ##AVVISO##" class="icon-help-circled"></span>
+					</span>
+					<span>##CPC##
+							<b>##MONETA##</b>
+							##WARNING##
+					</span>
+				</div>
+
+				<div class="box">
+					<span class='label2'>{CPD}: 
+						<span data-rel="{Cost for 1 day.} ##AVVISO##" class="icon-help-circled"></span>
+					</span>
+					<span>##CPD##
+							<b>##MONETA##</b>
+							##WARNING##
+					</span>
+				</div>
+
+				<div class="box">
+					<span class='label2'>{CTR}: 
+						<span data-rel="{Click through rate.} ##AVVISO##" class="icon-help-circled"></span>
+					</span>
+					<span>##CTR##
+							<b>##MONETA##</b>
+							##WARNING##
+					</span>
+				</div>
+
+				<div class="box">
+					<span class='label2'>{Price}: 
+					</span>
+					<span>##P##
+							<b>##MONETA##</b>
+					</span>	
+				</div>
+
+				<div class="box">
+					<div><span>{Views}:</span> <span>##V##</span></div>
+					<div><span>{Clicks}:</span> <span>##C##</span></div>
+				</div>
+
+			</div>
+
+			<div class="wrapchart sopra">
+				
+
+				<div id='container' class="mainside extended"></div>
+			</div>	
+
+			<div class="wrapchart sotto">
+				<div class="mainside extended">
+				##STATSLIST##
+				</div>
+			</div>
+
+
+		</div>
+	</body>
+</html>

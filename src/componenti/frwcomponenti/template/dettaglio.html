@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js?v=##VER##"></script>
+
+	<title>##TITLE##</title>
+
+    <script src="template/dettaglio.js?v=##VER##"></script>
+
+    <style>
+        .list {display:flex;flex:0 0 100%;justify-content:space-between;align-items:center;padding:.2rem 0}
+        #functionalities {display:none}
+        .profile999999 #functionalities {display:block}
+        label.check {display:block}
+        label.check.level999999 {display:none}
+        .profile999999 label.check.level999999 {display:block}
+        
+
+    </style>
+</head>
+	
+
+<body class="##classes##">
+    <div class="panel2">
+    
+        <div class="titlecontainer">
+            <a href="##gestore##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1> <a href="javascript:checkConStato()" class="salva"> {Save}</a>
+        </div>
+</div>
+<div class="corpo">
+	##STARTFORM##
+	##id##
+	##cd_module##
+	##op##
+
+	<fieldset class='mainfieldset'>
+		<legend>{Menu item details}</legend>
+		<div id='Datiprincipali'>
+			<table>
+				<tr>
+					<td width='150'>ID</td>
+					<td>##labelid##</td>
+				</tr>
+				<tr>
+					<td>{Slug}*</td>
+					<td>##nome##</td>
+				</tr>
+				<tr>
+					<td>{Label}*</td>
+					<td>##label##</td>
+				</tr>
+				<tr>
+					<td>{Translate}</td>
+					<td>##fl_translate## {Check to use the files in lang folder to translate the label in the menu}
+					</td>
+				</tr>				
+				<tr>
+					<td>{Url}*</td>
+					<td>##url##</td>
+				</tr>
+				<tr>
+					<td valign='top'>{Icon}</td>
+					<td>##iconlist##</td>
+				</tr>
+				<tr>
+					<td valign='top'>{Target}</td>
+					<td>##targetlist##</td>
+				</tr>                                     
+			</table>
+		</div>
+	</fieldset>
+	<fieldset class='mainfieldset'>
+		<legend>{Modules}</legend>
+		<div id='modu'>
+		<table>
+			<tr>
+				<tr>
+					<td>
+						<p class='description'>{This Menu item is used in these modules:}</p>
+						##elencomoduli##
+					</td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+    <fieldset class='mainfieldset' id="singlefunction">
+        <legend>{Visibility}</legend>
+        <div id='Datiprincipali3'>
+            <table>
+                <tr>
+                    <td>
+                        <p class='description'>{Who can see this Menu item:}</p>
+                        ##elencoprofili##
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+	<fieldset class='mainfieldset' id="functionalities">
+		<legend>{Functionalities}</legend>
+		<div class='aggiuntivi'>
+            
+             ##elencofunzionalita##
+            
+		</div>
+	</fieldset>
+
+	<br><br>
+
+
+	##ENDFORM##
+	</div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js"></script>
+
+	<title>##TITLE##</title>
+	
+	<script>	
+		$(document).ready(function() {
+			function setresp () {
+				if($('#respcheck').is(':checked')) {
+					$('#nu_width').val("-1").attr("readonly","readonly").hide();
+					$('#resposnsivelabel').show();
+				} else {
+					$('#nu_width').removeAttr("readonly").show();
+					$('#resposnsivelabel').hide();
+				}
+
+			}
+			$('#respcheck').on('change',function(){
+				setresp();
+				if(!$('#respcheck').is(':checked')) $('#nu_width').val("").focus();
+			});
+			if($('#nu_width').val()!="-1") {
+				$('#respcheck').removeAttr("checked"); 
+			}
+			setresp();
+
+			$('#vendita_online').on('change',function(){
+				if($('#vendita_online').is(':checked')) {
+					$('#trsale').show();
+					$('#trprice').show();
+				} else {
+					$('#trsale').hide();	
+					$('#trprice').hide();
+				}
+			});
+			$('#vendita_online').trigger('change');
+
+
+			function updateScript () {
+				var $code = 0;
+				if($('#fl_oldcode').is(':checked')) $code = 1;
+				if($('#fl_newcode').is(':checked')) $code = 0;
+				if($('#fl_linkpos').is(':checked')) $code = 2;
+				$.get("ajax.gettag.php?op=gettag&id=" + $("#id").val() + "&label=" + $("#de_posizione").val() +  "&vignette=" + ($('#fl_vignette').is(':checked') ? "1" : "0") + "&codeswitch=" + $code + "&trigger=" + $("#de_trigger").val() + "&timer=" + $("#nu_timer").val(), function(responseTxt, statusTxt, xhr){
+					$('#copytext').text( responseTxt );
+				});
+
+			}
+			$('#de_posizione').on('change',function(){
+				updateScript ();
+			});
+			$('#fl_vignette').on('change',function(){
+				if($('#fl_vignette').is(':checked')) {
+					$('#trtrigger').show();
+					$('#trtimer').show();
+				} else {
+					$('#trtrigger').hide();	
+					$('#trtimer').hide();
+				}
+
+				 updateScript () ;
+			
+			
+			});
+			$('#fl_vignette').trigger('change');
+
+			$('#fl_oldcode,#fl_newcode,#fl_linkpos').on('click',function(){
+				 updateScript () ;
+			});
+
+
+
+
+		} );
+	</script>
+
+</head>
+<body>
+    <div class="panel2">
+        <div class="titlecontainer">
+            <a href="##gestore##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1> <a href="javascript:checkConStato()" class="salva"> {Save}</a>
+        </div>
+    </div>
+    <div class="corpo">
+        ##STARTFORM##
+        ##id##
+        ##op##
+
+<fieldset class='mainfieldset'>
+		<legend>{Position details}</legend>
+		<div id='Datiprincipali'>
+			<table>
+				<tr>
+					<td valign='top' width='150'>{Website}</td>
+					<td>##cd_sito##</td>
+				</tr>
+
+				<tr>
+					<td valign='top' width='150'>{Position name}</td>
+					<td>##de_posizione##</td>
+				</tr>
+
+				<tr>
+					<td valign='top'>{Javascript tag}</td>
+					<td><textarea id="copytext" class="copy-text code">loading...</textarea>
+					<p class='description'>{Insert this script in your site to deliver banners.}</p>
+					<input type='radio' name='codeswitch' id='fl_newcode' checked value='0' /> {Use last code}<br>
+					<input type='radio' name='codeswitch' id='fl_oldcode' value='1' /> {Use old code for document.write compatibility}<br>
+					<input type='radio' name='codeswitch' id='fl_linkpos' value='2' /> {Use link position code for just text link}<br>
+					</td>
+				</tr>
+				<tr>
+					<td valign='top'>{Position size}</td>
+					<td>{Width}: 
+						<input type='text' value='100%' id='resposnsivelabel' class='small' readonly='readonly' style='display:none'/>##nu_width##&nbsp;px &nbsp;&nbsp;&nbsp; {Height}:##nu_height##&nbsp;px
+					</td>
+				</tr>
+				<tr>
+					<td valign='top'>{Responsive behaviour}</td>
+					<td>
+					<input type="checkbox" checked id='respcheck'/> {Check to make it responsive.}
+					<p class='description'>{Dimensions are used to force the images in simple banners and HTML5 banners.}</p>
+					</td>
+				</tr>
+
+				<tr>
+					<td valign='top'>{Fallback filler banner}</td>
+					<td>##cd_fallback##
+					<p class='description'>{Show this ad if there no more views availbale for other banners}</p>
+					</td>
+				</tr>
+
+
+			</table>
+		</div>
+	</fieldset>
+
+	<fieldset class='mainfieldset'>
+		<legend>{Sale}</legend>
+		<div id='Datiprincipali3'>
+			<table>
+				<tr>
+					<td valign='top'>{Available for purchase}</td>
+					<td>
+					##vendita_online##
+					</td>
+				</tr>
+				<tr id="trsale">
+					<td valign='top'>{Sales model}</td>
+					<td>
+					##modello_vendita##
+					</td>
+				</tr>
+
+				<tr id="trprice">
+					<td valign='top'>{Selling price}</td>
+					<td>
+					##prezzo_vendita####MONEY## ({Based on selling model})
+					</td>
+				</tr>
+
+			</table>
+		</div>
+	</fieldset>
+
+	<fieldset class='mainfieldset'>
+		<legend>{Vignette ads}</legend>
+		<div id='Datiprincipali2'>
+			<table>
+				<tr>
+					<td valign='top' width='150'>{Vignette mode}</td>
+					<td>##fl_vignette##</td>
+				</tr>
+				<tr id="trtrigger">
+					<td valign='top' width='150'>{HTML Trigger}</td>
+					<td>##de_trigger## <span data-rel="{This string is passed to querySelectorAll JS function}" class="icon-help-circled"></span></td>
+				</tr>
+				<tr id="trtimer">
+					<td valign='top' width='150'>{Timer}</td>
+					<td>##nu_timer## <span data-rel="{Seconds to wait before show the X button to close the vignette ad}" class="icon-help-circled"></span>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+
+	<br><br>
+
+
+	##ENDFORM##
+</div>
+
+</body>
+</html>

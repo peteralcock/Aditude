@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	##JQUERYINCLUDE##
+	<script language="JavaScript" src="##root##src/template/comode.js?v=##VER##"></script>
+
+	<title>Components</title>
+	<script language="JavaScript" src="##root##src/template/controlloform.js?v=##VER##"></script>
+	<script language="JavaScript" src="template/dettagliof.js?v=##VER##"></script>
+
+</head>
+<body>
+<div class='panel'>
+	<table>
+		<tr>
+			<td><a href="javascript:submitform()" class="salva">Salva</a>
+			</td><td><a href="##gestore##" class="annulla">Annulla</a>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="corpo">
+	<form name="dati" action="##gestore##" method="POST" onsubmit="return false">
+	<input type="hidden" name="id" value="##id##">
+	<input type="hidden" name="op" value="##action##">
+		<fieldset class='mainfieldset'>
+			<legend><a href="javascript:;" rel="Configura funzionalità (+)|Datiprincipali">Configura funzionalità</a></legend>
+			<div id='Datiprincipali'>
+			<table>
+				<tr>
+					<td>ID</td>
+					<td>&nbsp;&nbsp;&nbsp;</td>
+					<td>##labelid##</td>
+				</tr>
+				<tr>
+					<td>Componente</td><td>&nbsp;&nbsp;&nbsp;</td>
+					<td>##componente##
+						<input type="hidden" name="idcomponente" value="##idcomponente##">
+						<input type="hidden" name="modulichecckati" value="##modulichecckati##">
+					</td>
+
+				<tr>
+					<td>Nome</td>
+					<td>&nbsp;&nbsp;&nbsp;</td>
+					<td><input type="text" name="nome" value="##nome##" size="60" maxlength="100">
+					</td>
+				</tr>
+				<tr>
+					<td>Label/Valore</td>
+					<td>&nbsp;&nbsp;&nbsp;</td>
+					<td>
+						<input type="text" name="label" maxlength="100" size="60" value="##label##">
+					</td>
+				</tr>
+				<tr>
+					<td>Descrizione</td>
+					<td>&nbsp;&nbsp;&nbsp;</td>
+					<td>
+						<input type="text" name="descrizione" maxlength="255" size="60" value="##descrizione##">
+					</td>
+				</tr>
+			</table>
+		</div>
+		</fieldset>
+		<fieldset class='mainfieldset'>
+			<legend><a href="javascript:;" rel="Componente (+)|Datiprincipali3">Profili</a></legend>
+			<div id='Datiprincipali3'>
+			<table>
+				<tr>
+					<td>
+						<p class='description'>Profili che possono utilizzare questa funzionalità:</p>
+						##elencoprofili##
+					</td>
+				</tr>
+			</table>
+		</div>
+		</fieldset>
+	</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!--
+
+	NOT USED ?
+	
+-->
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script language="JavaScript" src="##root##src/template/comode.js"></script>
+
+	<title>##TITLE##</title>
+
+	<script type="text/javascript" src="//code.highcharts.com/highcharts.js"></script>
+
+	<script type="text/javascript">
+		var chart;
+
+
+		jQuery(document).ready(function($) {
+
+			if("##CHECK_VERSION##" == "ON") {
+
+				if(document.location.href.indexOf("zepsec.com")==-1) {
+					$.get("https://www.zepsec.com/amb/src/componenti/7banner/ver.php?ver=##VER##&from=" + encodeURIComponent(document.location.href), function (responseTxt) {
+						$("#ver").html(responseTxt);
+					});
+				
+				} else {
+					$('#ver').html("##VER##");
+				}
+
+			} else {
+
+				$('#ver').html("-");
+
+
+			}
+
+
+
+		setTimeout(function(){
+
+			try {
+				//$('div.panel').hide();
+			   chart = new Highcharts.Chart({
+					chart: {
+						zoomType: 'xy',
+						renderTo: 'container'
+					},
+					title: {
+						text: "##TITOLO##"
+					},
+					xAxis: [{
+						categories: [##GIORNI##],
+						crosshair: true
+					}],
+					yAxis: [{ // Primary yAxis
+						min: 0,
+						labels: {
+							format: '{value}',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						},
+						title: {
+							text: 'Click',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						}
+					}, { // Secondary yAxis
+						min:0,
+						title: {
+							text: 'Impressions',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						labels: {
+							format: '{value}',
+							style: {
+								color: Highcharts.getOptions().colors[0]
+							}
+						},
+						opposite: true
+					}],
+					tooltip: {
+						shared: true
+					},
+					legend: {
+						layout: 'vertical',
+						align: 'left',
+						x: 120,
+						verticalAlign: 'top',
+						y: 100,
+						floating: true,
+						backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+					},
+					series: [##SERIE##]
+			   });
+			}
+			catch (e) {
+				alert(e);
+			}
+			
+		   
+		   
+		},1000);
+
+		});
+
+	</script>
+
+
+	<style>
+		.webmaster .onlyadmin { display:none!important}
+		.admin .onlywebmaster { display:none!important}
+		.advertiser .onlywebmaster, .advertiser .onlyadmin { display:none!important}
+		#ver {font-weight:normal!important}
+
+	</style>
+</head>
+	<body class='##bodyclass##'>
+		<div class='panel'>
+			##STARTFORM##
+			##op##
+			<table>
+				<tr>
+				<td><h1 class='title'>##TITLE##</h1></td>
+					<td></td><td><table><tr><td>{From} ##startdate##</td><td>&nbsp; {To} ##enddate##</td><td>##SUBMIT##</td></tr></table></td>
+				</tr>
+				<tr>
+				</tr>
+			</table>
+			##ENDFORM##
+		</div>
+		<div class="corpo">
+			<div class="boxes" ##switch##>
+				<div class="box">{Today}: <span>##DC##<b>{Clicks}</b> / ##DV##<b>{Views}</b></span></div>
+				<div class="box">{Last week}: <span>##WC##<b>{Clicks}</b> / ##WV##<b>{Views}</b></span></div>
+				<div class="box">{Last month}: <span>##MC##<b>{Clicks}</b> / ##MV##<b>{Views}</b></span></div>
+				<div class="box onlywebmaster">{Earnings}: <span>##REVENUE## <b>{NOT PAID}</b></span></div>
+				<div class="box onlyadmin">{Your ver. / Last ver.}: <span>##VER## / <strong id="ver">{n.a.}</strong></span></div>
+			</div>
+			<div id='container' style="padding-top: 20px; background: #fff"></div>
+
+			##STATSLIST##
+
+			<br><br>
+			<div class="boxes onlyadmin">
+				<div class="box"><a href="https://codecanyon.net/item/adadmin-easy-adv-server/12710605/support" target="_blank">{Need help? Contact support.}</a></div>
+				<div class="box"><a href="https://www.zepsec.com/amb/docs/AdAdmindocumentation.html" target="_blank">{Open documentation.}</a></div>
+			</div>
+		</div>
+	</body>
+</html>

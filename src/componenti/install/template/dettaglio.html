@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js"></script>
+
+	<title>##TITLE##</title>
+
+</head>
+<body class="nomenu">
+	<div class="panel2">
+		<div class="titlecontainer">
+			<a href="##gestore##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1> 
+			<a href="javascript:checkConStato()" class="salva"> {Proceed}</a>
+		</div>
+	</div>
+<div class="corpo">
+##STARTFORM##
+##op##
+<input type='hidden' value='##rand##' name='nonce' />
+<fieldset class='mainfieldset' ##ISINSTALL##>
+	<legend>{MySQL}</legend>
+	<div id='Datiprincipali'>
+	<table>
+		<tr>
+			<td>{Host} *</td>
+			<td>##host##</td>
+		</tr>
+		<tr>
+			<td>{Database} *</td>
+			<td>##dbname##</td>
+		</tr>
+		<tr>
+			<td>{Username} *</td>
+			<td>##username##</td>
+		</tr>
+		<tr>
+			<td>{Password} *</td>
+			<td>##password##</td>
+		</tr>
+		<tr>
+			<td>{Language} *</td>
+			<td>##lang##
+			<p>{Default user language}</p></td>
+		</tr>
+		<tr>
+			<td>{Theme} *</td>
+			<td>##theme##
+			<p>{After installation you can change theme by editing pons-settings.php file.}</p></td>
+		</tr>
+	</table>
+	</div>
+</fieldset>
+
+
+<fieldset class='mainfieldset' ##ISUPDATE##>
+	<legend>{Updates}</legend>
+	<div id='Datiprincipali'>
+	<table>
+		<tr><td></td>
+			<td>{Settings file is ready, proceed to setup database.}</td>
+		</tr>
+	</table>
+	</div>
+</fieldset>
+
+##ENDFORM##
+</div>
+
+
+</body>
+</html>

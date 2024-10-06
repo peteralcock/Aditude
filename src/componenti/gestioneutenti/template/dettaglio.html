@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<head>
+	<!-- Edit my profile form -->
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js?v=##VER##"></script>
+
+	<title>##TITLE##</title>
+
+	<script src="../gestioneutenti/template/dettaglio.js?v=##VER##"></script>
+
+	<!-- <style>
+		#companyfieldset {display:none}
+		.advertiser #companyfieldset {display:block}
+	</style> -->
+
+</head>
+<body class="##bodyclass## ##classes##">
+<div class="panel2">
+	<div class="titlecontainer">
+		<a href="##root##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1> <a href="javascript:checkConStato()" class="salva"> {Save}</a>
+	</div>
+</div>
+	
+	
+	<div class="corpo">
+
+##STARTFORM##
+##id##
+##strong_password##
+##op##
+<fieldset class='mainfieldset'>
+	<legend>{My profile}</legend>
+	<div id='Datiprincipali'>
+	<table>
+		<tr>
+			<td class="small">{Username}*</td>
+			<td class="small"><b>##username##</b></td>
+		</tr>
+		<tr>
+			<td>{Password}*</td>
+			<td>##password##</td>
+		</tr>
+		<tr>
+			<td>{Name}*</td>
+			<td>##nome##</td>
+		</tr>
+		<tr>
+			<td>{Surname}*</td>
+			<td>##cognome##</td>
+		</tr>
+		<tr>
+			<td>{Email address}*</td>
+			<td>##de_email##</td>
+		</tr>
+		<tr>
+			<td>{Language}*</td>
+			<td>##de_lang##</td>
+		</tr>	
+		<tr>
+			<td>{Default component}</td>
+			<td>##cd_default_component##</td>
+		</tr>				
+	</table>
+	</div>
+</fieldset>
+
+
+<!-- <fieldset class='mainfieldset' id='companyfieldset'>
+	<legend>{Company}</legend>
+	<div id='Datiprincipali2'>##id_cliente##
+	<table>
+		<tr>
+			<td>{Company name}*</td>
+			<td>##de_nome##</td>
+		</tr>
+		<tr>
+			<td>{Address}</td>
+			<td>##de_address##</td>
+		</tr>
+	</table>
+	</div>
+</fieldset> -->
+
+##ENDFORM##
+</div>
+
+
+
+</body>
+</html>

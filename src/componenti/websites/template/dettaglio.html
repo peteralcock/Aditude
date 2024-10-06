@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js"></script>
+
+
+	<title>##TITLE##</title>
+
+	<style>
+		.webmaster #tr_webmaster, .webmaster #tr_share {display:none!important}
+	</style>
+	
+	<script>
+	jQuery(document).ready(function($) {
+
+	});
+	</script>
+</head>
+
+<body class="##bodyclass##">
+<div class="panel2">
+	<div class="titlecontainer">
+		<a href="##gestore##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1> <a href="javascript:checkConStato()" class="salva"> {Save}</a>
+	</div>
+</div>
+<div class="corpo">
+	##STARTFORM##
+	##id##
+	##op##
+
+<fieldset class='mainfieldset'>
+	<legend>{Website details}</legend>
+	<div id='Datiprincipali'>
+		<table>
+			<tr>
+				<td valign='top' width='150'>{Site name}*</td>
+				<td>##de_nomesito##</td>
+			</tr>
+			<tr>
+				<td valign='top' width='150'>{Site url}*</td>
+				<td>##de_urlsito##</td>
+			</tr>
+			<tr id="tr_webmaster">
+				<td valign='top'>{Webmaster}*</td>
+				<td>##cd_webmaster##</td>
+			</tr>
+			<tr>
+				<td valign='top'>{Status}*</td>
+				<td>##fl_status##
+					<p>{Website turned OFF will not be available in banner creation for new records, but banners will be delivered till the end of their timing.}<br><br></p>	
+				</td>
+			</tr>
+			<tr id="tr_share">
+				<td valign='top'>{Revenue share %}*</td>
+				<td>##nu_share##
+					<p>{This is the % for webmaster}</p>
+				</td>
+			</tr>
+			<tr>
+				<td valign='top'>{Description}</td>
+				<td>##de_text##</td>
+			</tr>
+		</table>
+	</div>
+</fieldset>
+
+	##ENDFORM##
+</div>
+
+
+</body>
+</html>

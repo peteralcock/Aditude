@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script language="JavaScript" src="##root##src/template/comode.js?v=##VER##"></script>
+
+	<title>##TITLE##</title>
+	<script language="JavaScript" src="template/dettaglio.js?v=##VER##"></script>
+	
+</head>
+<body>
+<div class="corpo">
+
+	<div class="panel2">
+		<div class="titlecontainer">
+			<a href="##gestore##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1> <a href="javascript:checkConStato()" class="salva"> {Save}</a>
+		</div>
+	</div>
+
+	##STARTFORM##
+	##id##
+	##op##
+
+	<fieldset class='mainfieldset'>		
+		<legend>{Setting}</legend>
+		<div id='Datiprincipali'>
+			<table>
+				<tr>
+					<td valign='top'><b>##const####de_nome##</b></td>
+					<td>##de_value##</td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+	
+	##ENDFORM##
+</div>
+
+
+
+
+</body>
+</html>

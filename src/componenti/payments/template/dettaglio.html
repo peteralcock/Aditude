@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js"></script>
+
+
+	<title>##TITLE##</title>
+
+	<style>
+
+		.salvastato {
+			background-color:#3A6CAB;
+			color: #ffffff!important;
+			padding: 0 10px;
+			line-height: 2rem;
+			display: inline-block;
+			border-radius: 5px;
+			margin-left: 10px;
+		}
+
+		.admin .tr_webmaster {display:none!important}
+		.webmaster .tr_admin {display:none!important}
+
+	</style>
+
+	<script>
+	jQuery(document).ready(function($) {
+
+		if( $('#fl_stato').length == 0) $('.salvastato').hide();
+		
+		$('.salvastato').on("click",function(e){
+			e.preventDefault();
+			if($('#fl_stato').val()==1) {
+				gconfirm(_e("Confirm that you have paid the webmaster for his amount outside AdAdmin software? The webmaster will be notified and this action is not undoable."),function() {
+					checkConStato();
+				},_e("YES"));
+			} else {
+				alert(_e("Switch the control to paid and press again the button") );
+			}
+
+		});
+
+	} );
+	</script>
+
+
+</head>
+
+<body class="##bodyclass##">
+	<div class="panel2">
+        <div class="titlecontainer">
+            <a href="##gestore##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1>
+        </div>
+    </div>
+    <div class="corpo">
+        ##STARTFORM##
+        ##id##
+        ##op##
+
+<fieldset class='mainfieldset'>
+		<legend><a href="javascript:;" rel="{Payment details} <span class='icon-down-open-mini'></span>|Datiprincipali">{Payment details} <span class='icon-up-open-mini'></span></a></legend>
+		<div id='Datiprincipali'>
+			<table>
+				<tr>
+					<td valign='top' width='150'>{Payment ID}</td>
+					<td><b>###idpagamento## - ##data##</b></td>
+				</tr>
+				<tr>
+					<td valign='top' width='150'>{Webmaster}</td>
+					<td><b>##nomewebmaster##</b></td>
+				</tr>
+				<tr>
+					<td valign='top' width='150'>{Total revenue}</td>
+					<td>##MONEY## ##total## 
+					</td>
+				</tr>
+				<tr>
+					<td valign='top' width='150'>{Revenue share}</td>
+					<td>##MONEY## ##adminmoney## (##ADMINLABEL##); &nbsp;  ##MONEY## ##totalwebmaster## (##WEBMASTERLABEL##) </td>
+				</tr>
+				<tr class="tr_webmaster">
+					<td valign='top' width='150'>{Status}</td>
+					<td>##stato##</td>
+				</tr>
+				<tr class="tr_admin">
+					<td valign='top' width='150'>{Status}</td>
+					<td>##fl_stato##  <a href="#" class="salvastato">{Mark as paid}</a></td>
+				</tr>
+				<tr>
+					<td valign='top' width='150'>{Log}</td>
+					<td><pre>##de_log##</pre></td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+
+	##ENDFORM##
+</div>
+</body>
+</html>

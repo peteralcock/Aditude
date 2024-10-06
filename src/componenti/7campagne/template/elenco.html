@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script language="JavaScript" src="##root##src/template/comode.js"></script>
+	<script>
+	function confermaDeleteCheck(theForm) {
+		confermaDeleteCheckMsg(theForm, "{Do you confirm to delete the selected campaigns?}");
+	}
+	</script>
+	<title>##TITLE##</title>
+
+	<style>
+		.advertiser #td_client {display:none}
+	</style>
+
+</head>
+
+<body class="##bodyclass##">
+
+	<div class="panel2">
+		<div class="titlecontainer">
+
+			<h1 class='title'>##TITLE##</h1>
+			
+			##bottoni1## <!-- add -->
+			
+			##bottoni2## <!-- delete -->
+			
+		</div>
+		<div class="filters">
+			<form id='filtri' method='get' name='filtri'>
+				<div class="field">
+					<label>{Client}:</label>
+					<span class="icon-filter">##combotipo##</span>
+				</div>
+				<div class="field">
+					<label>{Find}:</label>
+					<span class="icon-search"><input type="text" name="keyword" class='find' id="keyword" value="##keyword##" onkeypress="submitonenter('filtri',event,this)"/></span>
+				</div>															
+			</form>
+		</div>
+
+	</div>
+
+
+<!-- 
+<div class='panel'>
+	<form style='margin:0px; padding:0px;' id='filtri' method='get' name='filtri'>
+	<table>
+	<tr>
+		<td><h1 class='title'>##TITLE##</h1></td>
+		<td id="td_client">{Client}: ##combotipo##</td>
+		<td>{Find}: 
+		
+		<label><span class="find icon-search"></span><input type="text" name="keyword" class='find' id="keyword" value="##keyword##" onkeypress="submitonenter('filtri',event,this)"/></label>
+		
+		</td><td>&nbsp; &nbsp; &nbsp; </td><td id="td_add">##bottoni1##</td><td id="td_del">##bottoni2##</td>
+	</tr>
+	</table>
+	</form>
+</div> -->
+<div class="corpo">
+	##corpo##
+</div>
+</body>
+</html>

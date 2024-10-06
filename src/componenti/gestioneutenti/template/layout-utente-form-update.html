@@ -1,0 +1,83 @@
+<!--
+	
+	NOT USED
+
+--><!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script language="JavaScript" src="##root##src/template/comode.js"></script>
+
+	<title>{Edit user}</title>
+	
+	<script language="JavaScript" src="##root##src/template/controlloform.js"></script>
+	<script language="JavaScript" src="template/jscode-form.js?1"></script>
+</head>
+<body>
+<div class='panel'>
+	<table>
+		<tr>
+			<td><h1 class='title'><a href="##gestore##" class="annulla" title="{Cancel}"></a> ##TITLE##</h1></td>
+		</tr>
+	</table>
+</div>
+<div class='corpo'>
+<form name="dati" action="##gestore##" method="POST" onsubmit="return false">
+<input type="hidden" name="id" id="id" value="##id##">
+<input type="hidden" name="op" value="modificaStep2">
+<fieldset class='mainfieldset'>
+<legend>{User details}</legend>
+	<table>
+		<tr>
+			<td>{Username}</td>
+			<td><input type="text" name="lausername" value="##username##" size="32" maxlength="32">
+			</td>
+		</tr>
+		<tr valign="top">
+			<td>{Password}</td>
+			<td>
+				<input type="password" name="lapassword" maxlength="20" size="20" value="##password##"> ({Leave blank if you don't want to change it}) 			</td>
+		</tr>
+		<tr valign="top">
+			<td>{Name}</td>
+			<td>
+				<input type="text" name="nome" maxlength="100" size="20" value="##nome##">
+			</td>
+		</tr>
+		<tr valign="top">
+			<td>{Surname}</td>
+			<td>
+				<input type="text" name="cognome" maxlength="100" size="20" value="##cognome##">
+			</td>
+		</tr>
+		<tr valign="top">
+			<td class="small">{Profile}</td>
+			<td class="small">
+				<select name="cd_profilo">
+				##cd_profilo##
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="small">{Active user}</td>
+			<td class="small"><input type="checkbox" value="1" name="fl_attivo" ##fl_attivo##>
+			</td>
+		</tr>
+	</table>
+</fieldset>
+</form>
+</div>
+
+<div class='panel bottom'>
+	<table>
+		<tr>
+			<td><a href="javascript:submitform()" class="salva"> {Save}</a></td>
+		</tr>
+	</table>
+</div>
+
+</body>
+</html>

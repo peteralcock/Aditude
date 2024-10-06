@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js?v=##VER##"></script>
+    
+	<title>##TITLE##</title>
+
+    <script src="template/dettaglio.js?v=##VER##"></script>
+
+</head>
+	
+
+<body>
+    <div class="panel2">
+        <div class="titlecontainer">
+            <a href="##gestore##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1> <a href="javascript:checkConStato()" class="salva"> {Save}</a>
+        </div>
+	</div>
+<div class="corpo">
+	##STARTFORM##
+	##id##
+	##op##
+
+	<fieldset class='mainfieldset'>
+		<legend>{Module details}</legend>
+		<div id='Datiprincipali'>
+			<table>
+				<tr>
+					<td valign='top' width='150'>{Slug}*</td>					
+					<td>##nome##</td>
+				</tr>
+				<tr>
+					<td valign='top'>{Menu label}*</td>
+					<td>##label##</td>
+				</tr>
+				<tr>
+					<td>{Translate}</td>
+					<td>##fl_translate##
+						{Check to use the files in lang folder to translate the label in the menu}
+					</td>
+				</tr>	
+				<tr>
+					<td valign='top'>{Order}</td>
+					<td>##posizione##</td>
+				</tr>
+				<tr>
+					<td valign='top'>{Status}</td>
+					<td>##visibile##</td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+
+	<fieldset class='mainfieldset'>
+		<legend>{Menu items}</legend>
+		<div class='aggiuntivi'>
+			##TADDCOLLEGATI##
+			##TCOLLEGATI##
+		</div>
+	</fieldset>
+
+	<br><br>
+	##ENDFORM##
+</div>
+</body>
+</html>

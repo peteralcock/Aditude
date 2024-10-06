@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script language="JavaScript" src="##root##src/template/comode.js?v=##VER##"></script>
+
+	<title>##TITLE##</title>
+
+	<style>
+	
+	div.grigliacontainer {width: calc(100vw - 3rem);}
+	
+	@media only screen and (min-width: 768px) {
+			table.griglia {min-width: fit-content;}	
+			div.grigliacontainer {width:100%}
+	}
+	</style>
+	<script>
+
+		jQuery(document).ready(function($) {
+
+			var tipoip = "ipv4";
+			var rowstep  = "0";
+
+			imporstepbystep = function(){
+				$.ajax({
+						url: "ajax.geoip.php?op=aggiorna&id=" + rowstep + "|"+tipoip,
+						success: function(responseTxt){
+							//$("#loadloadload").html(responseTxt.toString());
+							if(responseTxt.toString() == "fine") {
+
+								return;
+
+							} else {
+								ar = responseTxt.toString().split("|");
+								rowstep = ar[0];
+								if(rowstep=="KO" || rowstep=="") {
+									$("#loadloadload").html("ERROR: "+responseTxt.toString());
+									return;
+								}
+								if(tipoip=="ipv4" || tipoip=="ipv6") tipoip = ar[1];
+								$("#loadloadload").html("<span class='loading'>loading rows "+rowstep+" "+tipoip+"...</span>");
+								if(rowstep=="fine") {
+									if(tipoip=="ipv4") {
+										tipoip = "ipv6";
+										rowstep  = "0";
+										imporstepbystep();
+									} else {
+										$('#tempdati').load(document.location + ' #Geoip',function(){
+											$('#Geoip').html( $('#tempdati').html() );
+											$('#tempdati').html("");
+											onloadActions();
+										});
+
+										return;
+									}
+								} else {
+										imporstepbystep();
+									}
+							}
+						}
+					}
+				);
+			};
+			tuttoFunction = function(){
+				$("#loadloadload").html("<span class='loading'>downloading and import...</span>");
+
+				$('#tutto').hide();
+				imporstepbystep();
+
+			};
+
+			onloadActions = function(){
+				$('#tutto').on("click",function(e){
+					e.preventDefault();
+					let allow = "##ALLOW_URL_FOPEN##";
+					if( allow !="on" ) {
+
+						alert(_e("Can't load external files. Please ALLOW_URL_OPEN in your php.ini file"));
+
+					} else {
+						
+						alert(_e("Geoip update process started. Please don't close this window till the end of the process. You can see progress status below in Geoip panel."));
+						
+						tuttoFunction();
+					}
+				});	
+			};
+
+			onloadActions();
+		});
+	</script>
+</head>
+<body>
+<div class="panel2">
+	<div class="titlecontainer">
+
+		<h1 class='title'>##TITLE##</h1>
+		
+		<!-- ##bottoni1##  add -->
+		
+		<!-- ##bottoni2## delete -->
+
+	</div>
+	<div class="filters">
+		<form id='filtri' method='get' name='filtri'>
+			<div class="field">
+				<label>{Find}:</label>
+				<span class="icon-search"><input type="text" name="keyword" class='find' id="keyword" value="##keyword##" onkeypress="submitonenter('filtri',event,this)"/></span>
+			</div>															
+		</form>
+	</div>
+</div>
+
+<!-- <div class='panel'>
+
+
+			<form style='margin:0px; padding:0px;' id='filtri' method='get' name='filtri'>
+			<table>
+			<tr>
+			<td><h1 class='title'>##TITLE##</h1></td>
+				<td></td>
+				<td>{Find}: <label><span class="find icon-search"></span><input type="text" name="keyword" class='find' id="keyword" value="##keyword##" onkeypress="submitonenter('filtri',event,this)"/></label>
+				</td><td>&nbsp; &nbsp; &nbsp; </td>
+			</tr>
+			</table>
+			</form>
+</div> -->
+<div class="corpo">
+
+	<fieldset class='mainfieldset'>
+		<legend>{Main settings}</legend>
+		<div id='setts'>
+			##corpo##
+		</div>
+	</fieldset>
+
+	<fieldset class='mainfieldset'>
+		<legend>{Email}</legend>
+		<div id='corpo_email'>
+			##corpo_email##
+		</div>
+	</fieldset>
+
+	<fieldset class='mainfieldset'  style="##BANNERMODULE##">
+		<legend>{Payments}</legend>
+		<div id='corpo_payments'>
+			##corpo_payments##
+		</div>
+	</fieldset>
+
+	<fieldset class='mainfieldset' style="##BANNERMODULE##">
+		<legend>{Geoip settings}</legend>
+		<div id='Geoip'>
+			##corpo_geoip##
+
+			<table>
+				<tr>
+					<td valign='top'>{Your ip}:</td>
+					<td><b>##ip##</b>
+					</td>
+				</tr>
+				<tr>
+					<td valign='top'>{Your location}:</td>
+					<td><b>##geoip##</b>
+					</td>
+				</tr>
+				<tr>
+					<td valign='top'>{IP Location records}:</td>
+					<td><b>##ips##</b>
+					</td>
+				</tr>
+				<tr>
+					<td valign='top'>{Status}:</td>
+					<td>##status##
+						<br/>
+						<a href="#" id="tutto" class="btn">#STEP#</a>
+					</td>
+				</tr>
+
+			</table>
+			
+			<p>Geolocalization is made with <a href="https://lite.ip2location.com/" target="_blank"><u>IP2Location LITE</u></a> database.</p>
+			
+			<style>
+				#loadloadload span.loading {background:transparent url(../../../src/images/loading.gif) 0 0 no-repeat;padding-left:24px; }
+			</style>
+			<div id="loadloadload">
+			</div>
+			<!-- <p><b>TIP:</b> If you use the geo ip location features only for a small set of countries (or even just one), it's recommended to clear the tables from all the records of other countries to speed up the search process.</p> -->
+		</div>
+	</fieldset>
+</div>
+<div id='tempdati'></div>
+</body>
+</html>

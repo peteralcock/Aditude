@@ -1,0 +1,21 @@
+
+/* LOGIN PAGE */
+body.login-template {background:transparent url(../sometest_theme/pics/pexels-ian-beckley-2440024.jpg) center center;	background-size:cover;}
+body.login-template #maincontainer {display:flex;flex-direction:column;justify-content:center;align-items:center;padding-bottom:10%}
+body.login-template #loginform {order:1;margin-top:10%;flex:0 0 80%;width:80%;overflow:hidden;border-radius:.3rem;position:static;transform:translate(0,0);/*max-width:350px;*/	box-shadow:0px 0px 1000px #000d;}
+body.login-template #loginform table {box-shadow:none;border-bottom:10px solid #fff;}
+body.login-template	#introbox {margin-top:10%;flex:0 0 80%;width:80%;}
+body.login-template #introbox p {font-size: 2rem;line-height: 1.2;text-shadow: 0px 0px 2rem #0009;color: #fff;}
+body.login-template .textcontainer {background:#0005;padding:1rem;border-radius:.5rem;color: #fff;}
+body.login-template #introbox h1 {font-size: 3rem;line-height: 1rem;padding-bottom: 1rem;text-shadow: 0px 0px 2rem #000a;padding-top: 1rem;}
+body.login-template #introbox h2 {font-size: 2.8rem;line-height: 3rem;padding-bottom: 2rem;text-shadow: 0px 0px 2rem #000a;}
+body.login-template #introbox nav {padding-top: 2rem;}
+body.login-template #introbox nav a {background: #2b4b70;color:#fff;line-height: 4.4rem;display:inline-block;padding: 0 1rem;border-radius: .6rem;margin-right: 2rem;font-size: 1.5rem;box-shadow: 0px 0px 3rem #0007;margin-bottom: 1rem;}
+
+/* DESKTOP */
+@media only screen and (min-width: 768px) {
+	body.login-template #loginform {flex: 0 0 25%;}
+	body.login-template #maincontainer {flex-direction:row}
+	body.login-template #introbox {flex:0 0 40%;max-width:40%;margin-right:10%}
+}
+

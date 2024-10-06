@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="robots" content="noindex">
+
+	##JQUERYINCLUDE##
+	<script src="##root##src/template/comode.js?v=##VER##"></script>
+
+	<title>##TITLE##</title>
+
+	<script src="../gestioneutenti/template/dettaglio.js?v=##VER##"></script>
+
+</head>
+<body class="nomenu">
+	<div class="panel2">
+		<div class="titlecontainer">
+			<a href="##root##" class="annulla" title="{Cancel}"></a> <h1 class='title'>##TITLE##</h1> <a href="javascript:checkConStato()" class="salva"> {Save}</a>
+		</div>
+	</div>
+		
+		
+	<div class="corpo">
+
+		##STARTFORM##
+		##id##
+		##op##
+		##strong_password##
+
+		<fieldset class='mainfieldset'>
+			<legend>{User}</legend>
+			<div id='Datiprincipali'>
+			<table>
+				<tr>
+					<td class="small">{Username}*</td>
+					<td class="small">##username##</td>
+				</tr>
+				<tr>
+					<td class="small">{Password}*</td>
+					<td class="small">##password##</td>
+				</tr>
+				<tr>
+					<td>{Name}*</td>
+					<td>##nome##</td>
+				</tr>
+				<tr>
+					<td>{Surname}*</td>
+					<td>##cognome##</td>
+				</tr>
+				<tr>
+					<td>{Email address}*</td>
+					<td>##de_email##</td>
+				</tr>
+				<tr>
+					<td>{Profile}*</td>
+					<td>##cd_profilo##</td>
+				</tr>
+			</table>
+			</div>
+		</fieldset>
+
+		##ENDFORM##
+</div>
+
+
+
+
+</body>
+</html>
