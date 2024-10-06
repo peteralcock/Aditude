@@ -1,6 +1,5 @@
 # Aditube 
-
-
+![Screenshot](/preview01.jpg?raw=true "Preview-1")
 
 ### Introduction
 Aditube is an ad-server software that manages ads on websites. It is designed for use in various scenarios:
@@ -15,6 +14,8 @@ Aditube is an ad-server software that manages ads on websites. It is designed fo
 - Easy creation of responsive banners without code using templates.
 - HTML5 banners uploaded as ZIP files (HTML, CSS, JavaScript).
 - Banners are rotated in positions automatically.
+![Screenshot](/preview02.jpg?raw=true "Preview-2")
+![Screenshot](/preview03.jpg?raw=true "Preview-3")
 
 ### Installation
 
@@ -51,7 +52,7 @@ To simplify the creation of banners, Aditube uses shortcodes that are replaced d
 Upon the first login, several example banners, positions, campaigns, and clients are created to get started.
 
 ### Selling Ads
-
+![Screenshot](/preview04.jpg?raw=true "Preview-4")
 Aditube supports selling ads via **PayPal** and **Coinbase** (crypto payments). After configuring a payment gateway, users can sign in, create campaigns, and buy ads through a straightforward process.
 
 1. The advertiser creates a banner.
