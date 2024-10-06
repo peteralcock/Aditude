@@ -1,4 +1,7 @@
 # Aditube 
+Wanna run your own digital ad server? Well NOW YOU CAN! Just clone my repository, setup PHP with your web server, and you can make BILLIONS! (Maybe.)
+
+
 ![Screenshot](/preview01.jpg?raw=true "Preview-1")
 
 ### Introduction
